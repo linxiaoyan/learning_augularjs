@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>ng-init</title>
+  <script src="angular.min.js"></script>
+
+<script>
+  /*
+  ng-init
+  ng-include
+  ng-model
+  ng-model-options
+  updateOn
+  ng-controller
+  as
+  */
+
+  var m1 = angular.module('myApp', []);
+
+  m1.controller('fnA', ['$scope', function($scope) {
+    $scope.text = 'hello';
+    $scope.arr = [['a', 'b'], ['c', 'd']];
+  }]);
+</script>
+</head>
+<body>
+<div ng-controller="fnA" ng-init="text='hi'">{{text}}</div>
+<div ng-controller="fnA">
+  <div ng-repeat="arrOuter in arr" ng-init="outerIndex = $index">
+    <div ng-repeat="arrInner in arrOuter" ng-init="innerIndex = $index">
+      <p>{{arrInner}}:{{outerIndex}}{{innerIndex}}</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

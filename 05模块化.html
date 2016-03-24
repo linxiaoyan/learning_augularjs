@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>模块化</title>
+  <script src="angular.min.js"></script>
+
+<script>
+  var m1 = angular.module('myApp', []);
+
+  /*
+  压缩问题：
+  m1.controller('fnA', function($scope) {});  -->  m1.controller('fnA', ['$scope', function($scope) {}]);
+  */
+
+  m1.controller('fnA', ['$scope', function($scope) {
+    $scope.name = 'dave';
+  }]);
+
+  m1.controller('fnB', ['$scope', function($scope) {
+    $scope.name = 'john';
+  }]);
+</script>
+</head>
+<body>
+<div ng-controller="fnA">
+  <p>{{name}}</p>
+</div>
+<div ng-controller="fnB">
+  <p>{{name}}</p>
+</div>
+</body>
+</html>

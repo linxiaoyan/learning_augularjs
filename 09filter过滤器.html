@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>filter过滤器</title>
+  <script src="angular.min.js"></script>
+
+<script>
+  var m1 = angular.module('myApp', []);
+
+  //自定义过滤器
+  m1.filter('firstUpper', function(){
+    return function(str, num){
+      console.log(num);
+      return str.charAt(0).toUpperCase() + str.substring(1);
+    };
+  });
+
+  m1.controller('fnA', ['$scope', '$filter', function($scope, $filter) {
+    $scope.name = 'dave';
+    $scope.price = '723894734.7489545';
+    $scope.info = {"name": "dave", "age": "20"};
+    $scope.arr = ['a', 'b', 'c', 'd'];
+    $scope.secs = '3748935795';
+
+    $scope.classmates = [
+      {name:"john", age:"29"},
+      {name:"dave", age:"30"},
+      {name:"jack", age:"31"},
+      {name:"sam", age:"30"}
+    ];
+
+    //在js中使用过滤器
+    $scope.upperName = $filter('uppercase')($scope.name);
+    $scope.getMon = $filter('date')($scope.secs, 'MMMM');
+  }]);
+</script>
+</head>
+<body>
+<div ng-controller="fnA">
+  <p>{{price | currency: "￥"}}</p>
+  <p>{{price | number: 1}}</p>
+  <p>{{name | uppercase}}</p>
+  <pre>{{info | json}}</pre>
+  <p>{{name | limitTo: 2}}</p>
+  <p>{{arr | limitTo: 2}}</p>
+  <p>{{secs | date: 'fullDate'}}</p>
+  <p>{{classmates | orderBy: 'age': true}}</p>
+  <p>{{classmates | filter: 'j'}}</p>
+  <p>{{name | limitTo: 2 | uppercase}}</p>
+  <p>{{upperName}}</p>
+  <p>{{getMon}}</p>
+  <p>{{name | firstUpper: 2}}</p>
+</div>
+</body>
+</html>

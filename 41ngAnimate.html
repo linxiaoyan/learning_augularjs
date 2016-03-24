@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>ngAnimate</title>
+
+<style>
+.box {width:200px; height:200px; margin:10px; background:red; transition:1s all;}
+.box.ng-enter {opacity:0;}
+.box.ng-enter-active {opacity:1;}
+.box.ng-leave {opacity:1;}
+.box.ng-leave-active {opacity:0;}
+
+.box2 {width:200px; height:200px; margin:10px; background:red; transition:1s all;}
+.box2.ng-hide-remove {opacity:0;}
+.box2.ng-hide-remove-active {opacity:1;}
+.box2.ng-hide-add {opacity:1;}
+.box2.ng-hide-add-active {opacity:0;}
+
+.box3 {width:200px; height:200px; margin:10px; background:red;}
+</style>
+
+<script src="jquery-2.0.3.js"></script>
+<script src="angular.min.js"></script>
+<script src="http://cdn.bootcss.com/angular.js/1.2.9/angular-animate.min.js"></script>
+<script>
+  /*
+  CSS3的方式：
+  ng-enter
+  ng-enter-active
+  ng-leave
+  ng-leave-active
+
+  支持的指令：
+  if,view,repeat,include,switch
+
+  repeat
+  ng-enter-stagger {animation-delay}
+
+  ================================================
+
+  ng-hide-add
+  ng-hide-add-active
+  ng-hide-remove
+  ng-hide-remove-active
+
+  支持的指令：
+  class,show,hide,model等
+
+   ================================================
+
+   JS方式：
+   animation()
+   --enter/leave
+   --removeClass/addClass
+   */
+
+  var m1 = angular.module('myApp', ['ngAnimate']);
+
+  //使用jQuery进行动画操作
+  m1.animation('.box3', function() {
+    return {
+      enter: function(element, done) {
+        $(element).css({width:0, height:0});  //给新创建的div设置样式才能进行后面的动画
+        $(element).animate({width:200, height:200}, 1000, done);
+      },
+      leave: function(element, done) {
+        $(element).animate({width:0, height:0}, 1000, done); //done清除div
+      },
+      addClass: function(element, sClass, done) {
+        $(element).animate({width:0, height:0}, 1000, done);
+      },
+      removeClass: function(element, sClass, done) {
+        $(element).css({width:0, height:0});
+        $(element).animate({width:200, height:200}, 1000, done);
+      }
+    }
+  });
+
+  m1.controller('fnA', ['$scope', function($scope){
+    $scope.bBtn = true;
+  }]);
+</script>
+</head>
+
+<body>
+<div ng-controller="fnA">
+  <input type="checkbox" ng-model="bBtn"/>
+  <div ng-if="bBtn" class="box"></div>
+  <div ng-show="bBtn" class="box2"></div>
+  <div ng-if="bBtn" class="box3"></div>
+  <div ng-show="bBtn" class="box3"></div>
+</div>
+</body>
+</html>

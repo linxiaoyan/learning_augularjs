@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>ngResource</title>
+
+<script src="http://cdn.bootcss.com/angular.js/1.3.8/angular.min.js"></script>
+<script src="http://cdn.bootcss.com/angular.js/1.3.8/angular-route.min.js"></script>
+<script src="http://cdn.bootcss.com/angular.js/1.3.8/angular-resource.min.js"></script>
+<script>
+  /*
+  get()   支持请求的数据是json
+  query() 支持请求的数据是array
+  */
+
+  var m1 = angular.module('myApp', ['ngRoute', 'ngResource']);
+
+  m1.config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+        .when('/aaa/:name', {
+          template: '<div>{{data[0].name}}</div><div>{{data[0].age}}</div><div>{{data[0].job}}</div>',
+          controller: 'fnA'
+        })
+        .otherwise({
+          redirectTo: '/aaa/zhangsan'
+        });
+  }]);
+
+  m1.controller('fnA', ['$scope', '$resource', '$location', '$routeParams', function($scope, $resource, $location, $routeParams) {
+    /*
+    var objRe = $resource(':name.:aaa', {aaa: 'json'}, {}); //lisi.json
+    $scope.data = objRe.get({name: 'lisi'}, function() {}, function() {}); //name设置成lisi
+    */
+
+    $scope.$location = $location;
+    console.log($routeParams);
+
+    if($routeParams.name) {
+      var objRe = $resource($routeParams.name + '.json', {}, {});
+      $scope.data = objRe.query();
+    }
+  }]);
+
+</script>
+
+</head>
+<body>
+<!--
+<div ng-controller="fnA">{{data.name}}</div>
+-->
+<div ng-controller="fnA">
+  <input type="button" value="张三" ng-click="$location.path('aaa/zhangsan')">
+  <input type="button" value="李四" ng-click="$location.path('aaa/lisi')">
+  <div ng-view></div>
+</div>
+</body>
+</html>

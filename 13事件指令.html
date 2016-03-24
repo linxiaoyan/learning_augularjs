@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>事件指令</title>
+  <script src="angular.min.js"></script>
+
+<script>
+  /*
+  ng-click/dbclick
+  ng-mousedown/up
+  ng-mouseenter/leave
+  ng-mousemove/over/out
+  ng-keydown/up/press
+  ng-focus/blur
+  ng-submit
+  ng-selected
+  ng-change
+  ng-copy
+  ng-cut
+  ng-paste
+  */
+
+  var m1 = angular.module('myApp',[]);
+
+  m1.controller('fnA', ['$scope', function($scope) {
+    $scope.dataList = ['aaa', 'bbb', 'ccc', 'ddd'];
+  }]);
+</script>
+</head>
+<body>
+<div ng-controller="fnA">
+  <input type="checkbox" ng-model="aaa">
+  <select>
+    <option>111</option>
+    <option ng-selected="aaa">222</option>
+    <option>333</option>
+  </select>
+
+  <br/>
+  <input type="text" ng-change="bbb='hello'" ng-model="bbb">{{bbb}}
+  <br/>
+  <input type="text" value="abcdefghijkl" ng-paste="ccc=true">{{ccc}}
+</div>
+</body>
+</html>

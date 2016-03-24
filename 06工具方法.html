@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>工具方法</title>
+  <script src="angular.min.js"></script>
+
+<script>
+  /*
+  angular.bind();
+  angular.copy();
+  angular.extend();
+  angular.isArray();
+  angular.isDate();
+  angular.isDefined();
+  angular.isUndefined();
+  angular.isFunction();
+  angular.isNumber();
+  angular.isObject();
+  angular.isString();
+  angular.isElement();
+  angular.equals();
+  angular.forEach();
+  angular.fromJson()/toJson();
+  angular.identity()/noop();
+  angular.lowercase()/uppercase();
+  angular.element();
+  angular.bootstrap();
+  angular.injector();
+  */
+
+
+  /*
+  //angular.bind(): 改变this指向
+
+  function show(n1, n2){
+    alert(n1);
+    alert(n2);
+    alert(this);
+  }
+
+  angular.bind(document, show, 1)(2);
+  */
+
+
+  /*
+  //angular.copy(): 深拷贝
+
+  var a = {name: 'dave'};
+  var b = {age: 30};
+  var c = angular.copy(a);    //把a值拷贝给c
+  var d = angular.copy(a, b); //把a值拷贝给b
+  */
+
+
+  /*
+  //angular.extend(): 对象继承
+
+  var a = {name: 'dave'};
+  var b = {age: 30};
+  var c = angular.extend(a, b); //a继承b值，深拷贝
+
+  console.log(a);
+  */
+
+
+  /*
+  var a = NaN;
+  var b = NaN;
+  alert(angular.equals(a, b)); //true;
+  */
+
+
+  /*
+  var json = {name: 'dave', age: 20};
+  var result = [];
+
+  angular.forEach(json, function(value, i) {
+  this.push(i + ':' + value);
+  }, result);
+
+  console.log(result);
+  */
+
+
+  /*
+  var str = '{"name":"dave", "age":"30"}';
+  var json = angular.fromJson(str);  //JSON.parse()
+  console.log(json);
+
+  console.log(angular.toJson(json, true));  //JSON.stringify()
+  */
+
+
+  /*
+  var str = 'angular';
+  console.log(angular.identity(str));
+  console.log(angular.noop());
+  */
+
+
+  var m1 = angular.module('myApp1', []);
+  var m2 = angular.module('myApp2', []);
+
+  m1.controller('fnA', ['$scope', function($scope) {
+    $scope.name = 'dave';
+  }]);
+
+  m2.controller('fnB', ['$scope', function($scope) {
+    $scope.name = 'john';
+  }]);
+
+  document.onclick = function() {
+    //angular.bootstrap(document, ['myApp']);  //动态初始化，可以初始化多个模块，而ng-app指令只能初始化第一个模块
+
+    var aDiv = document.getElementsByTagName('div');
+
+    angular.bootstrap(aDiv[0], ['myApp1']);
+    angular.bootstrap(aDiv[1], ['myApp2']);
+  };
+
+</script>
+</head>
+<body>
+<div ng-controller="fnA">
+  <p>{{name}}</p>
+</div>
+<div ng-controller="fnB">
+  <p>{{name}}</p>
+</div>
+
+<div id="div1">abc</div>
+
+<script>
+  var oDiv = document.getElementById('div1');
+  angular.element(oDiv).css('background', 'red');
+</script>
+</body>
+</html>

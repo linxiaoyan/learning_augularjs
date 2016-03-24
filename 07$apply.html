@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+  <meta charset="UTF-8">
+  <title>$apply</title>
+  <script src="angular.min.js"></script>
+
+<script>
+  function fnA($scope) {
+    $scope.name = 'dave';
+
+    setTimeout(function() {
+      $scope.$apply(function() {  //原生的方法可以修改数据
+        $scope.name = 'john';
+      })
+    }, 2000);
+  }
+</script>
+</head>
+<body>
+<div ng-controller="fnA">
+  <p>{{name}}</p>
+</div>
+</body>
+</html>

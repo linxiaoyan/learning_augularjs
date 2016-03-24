@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>表单验证</title>
+
+<style>
+input.ng-valid {border:1px green solid; background:green;}
+input.ng-invalid {border:1px red solid; background:red;}
+</style>
+
+<script src="angular.min.js"></script>
+<script>
+  /*
+  通过name的方式进行查找：
+  $valid     是否有效
+  $invalid
+  $pristine  初始值
+  $dirty     非初始值
+  $error
+
+  type: email, number, url
+  required
+  ng-minlength
+  ng-maxlength
+  ng-pattern
+
+  class:
+  .ng-valid {}
+  .ng-invalid {}
+  .ng-pristine {}
+  .ng-dirty {}
+  */
+
+  var m1 = angular.module('myApp', []);
+
+  m1.controller('fnA', ['$scope', function($scope) {
+    $scope.text = 'angular';
+  }]);
+</script>
+</head>
+<body>
+<div ng-controller="fnA">
+  <form novalidate name="myForm">
+    <input type="text" name="myText" ng-model="text" required ng-minlength="5" ng-pattern="/^[a-zA-Z]+$/">
+    <div>{{myForm.myText.$valid}}</div>
+    <div>{{myForm.myText.$invalid}}</div>
+    <div>{{myForm.myText.$pristine}}</div>
+    <div>{{myForm.myText.$dirty}}</div>
+    <div>{{myForm.myText.$error}}</div>
+  </form>
+</div>
+</body>
+</html>

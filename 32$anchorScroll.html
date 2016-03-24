@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>$anchorScroll</title>
+
+<style>
+#parent div {width:300px; height:500px;  margin:20px; border:1px #000 solid;}
+#parent ul { position:fixed; top:0; right:0; width:200px;}
+</style>
+  <script src="angular.min.js"></script>
+
+<script>
+  var m1 = angular.module('myApp', []);
+
+  m1.controller('fnA', ['$scope', '$location', '$anchorScroll', function($scope, $location, $anchorScroll) {
+    $scope.change = function(id) {
+      $location.hash(id);
+      $anchorScroll();  //hash值不变的时候不会跳转，主动调用跳转
+    };
+  }]);
+
+</script>
+</head>
+<body>
+<div id="parent" ng-controller="fnA">
+  <ul>
+    <li ng-repeat="id in [1,2,3,4,5]" ng-click="change('div'+id)">{{id}}</li>
+  </ul>
+  <div ng-repeat="id in [1,2,3,4,5]" ng-attr-id="div{{id}}">{{id}}</div>
+</div>
+</body>
+</html>

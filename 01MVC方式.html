@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+  <meta charset="UTF-8">
+  <title>MVC方式</title>
+  <script src="angular.min.js"></script>
+
+<script>
+  /*
+  数据的挂载通过：$scope
+  控制器：       ng-controller
+  数据访问方式：  双大括号表达式
+  */
+
+  function fnA($scope) {
+    $scope.name = 'dave';
+    $scope.age = '30';
+  }
+</script>
+</head>
+<body>
+<div ng-controller="fnA">
+  <p>{{name}}</p>
+  <p>{{age}}</p>
+</div>
+</body>
+</html>

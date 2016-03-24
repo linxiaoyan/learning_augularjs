@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+  <meta charset="UTF-8">
+  <title>作用域</title>
+  <script src="angular.min.js"></script>
+
+<script>
+  function fnA($scope, $rootScope) { //依赖注入，也叫服务
+    $scope.name = 'john';
+    $scope.age = '30';
+    $rootScope.country = 'USA';
+
+    alert('123');  //fnA作为控制器的时候是没法传递参数的，angular内部已经注入了参数$scope和$rootScope
+  }
+
+  function fnB($scope) {
+    $scope.name = 'dave'
+  }
+</script>
+</head>
+<body>
+<div ng-controller="fnA">
+  <p>{{name}}</p>
+  <div ng-controller="fnB">
+    <p>{{name}}</p>
+    <p>{{age}}</p>
+    <p>{{country}}</p>
+  </div>
+</div>
+</body>
+</html>

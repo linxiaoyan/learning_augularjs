@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>自定义服务的通信</title>
+  <script src="angular.min.js"></script>
+  <script src="38service.js"></script>
+
+<script>
+  var m = angular.module('myApp', ['module1', 'module2']);
+
+  m2.config(['myService2Provider', function(myService2Provider){
+    myService2Provider.name = 'hi';
+  }]);
+
+  m.controller('fnA', ['$scope', 'myService1', 'myService2', function($scope, myService1, myService2){
+    console.log(myService1.show());
+    console.log(myService2.show());
+  }]);
+</script>
+</head>
+<body>
+<div ng-controller="fnA"></div>
+</body>
+</html>

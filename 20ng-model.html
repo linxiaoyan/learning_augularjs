@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>ng-model</title>
+  <script src="angular.min.js"></script>
+
+<script>
+  //ng-model: updateOn
+
+  var m1 = angular.module('myApp', []);
+
+  m1.controller('fnA', ['$scope', function($scope) {
+    $scope.text = 'hello';
+    $scope.text2 = 'hi';
+  }]);
+
+</script>
+</head>
+<body>
+<div ng-controller="fnA">
+	<input type="text" ng-model="text"><span>{{text}}</span><br/>
+  <input type="text" ng-model="text2" ng-model-options="{updateOn: 'blur'}"><span>{{text2}}</span>
+</div>
+</body>
+</html>

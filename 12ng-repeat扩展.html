@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>ng-repeat扩展</title>
+
+<style>
+.active1 {background:green;}
+.active2 {background:yellow;}
+</style>
+
+<script src="angular.min.js"></script>
+
+<script>
+  /*
+  $index
+  $first
+  $middle
+  $last
+  $even
+  $odd
+  ng-repeat-start
+  ng-repeat-end
+  */
+
+  var m1 = angular.module('myApp', []);
+
+  m1.controller('fnA', ['$scope', function($scope) {
+    $scope.dataList = ['aaa', 'bbb', 'ccc', 'ddd', 'eee'];
+  }]);
+</script>
+</head>
+<body>
+<div ng-controller="fnA">
+  <ul>
+    <li ng-repeat=" data in dataList ">{{$even}}</li>
+    <li class="{{$even ? 'active1' : 'active2'}}" ng-repeat="data in dataList">{{data}}</li>
+  </ul>
+
+  <div ng-repeat-start="data in dataList">{{data}}</div>
+  <div>{{data}}</div>
+  <div ng-repeat-end>{{data}}</div>
+</div>
+</body>
+</html>

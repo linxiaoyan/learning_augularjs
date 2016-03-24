@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>provider</title>
+  <script src="angular.min.js"></script>
+
+<script>
+  /*
+  $interpolate
+  --startSymbol()
+  --endSymbol()
+
+  $log
+  --debugEnabled()
+
+  $anchorScroll
+  --disableAutoScrolling() //禁止通过hash值跳转
+  */
+
+  var m1 = angular.module('myApp', []);
+
+  m1.config(['$interpolateProvider', '$logProvider', function($interpolateProvider, $logProvider) {
+    $interpolateProvider.startSymbol('@@');
+    $interpolateProvider.endSymbol('@@');
+
+    $logProvider.debugEnabled(true);
+  }]);
+
+  m1.controller('fnA', ['$scope', '$interpolate', '$log', function($scope, $interpolate, $log) {
+    $scope.$watch('body', function(newBody) {
+      if(newBody){
+        var temp = $interpolate(newBody);
+        $scope.showText = temp({name: $scope.name});
+
+        $log.debug('hello');
+      }
+    });
+  }]);
+</script>
+</head>
+<body>
+<div ng-controller="fnA">
+  <input type="text" ng-model="name">
+    <textarea ng-model="body">
+    </textarea>
+  <p>@@showText@@</p>
+</div>
+</body>
+</html>

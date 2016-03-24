@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>ng-include</title>
+  <script src="angular.min.js"></script>
+
+<script>
+  var m1 = angular.module('myApp', []);
+
+  m1.controller('fnA', ['$scope', function() {
+
+  }]);
+</script>
+</head>
+<body>
+<div ng-controller="fnA" ng-include="'19temp.html'"></div>
+</body>
+</html>

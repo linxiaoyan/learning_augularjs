@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>事件内部的传播方式</title>
+  <script src="angular.min.js"></script>
+
+<script>
+  /*
+  $emit       向上传递
+  $broadcast  向下传递
+
+  event
+  --targetScope
+  --currentScope
+  --name
+  --stopPropagation()
+
+  内部传播方式：
+  $routeChangeStart
+  $viewContentLoaded
+  */
+
+  var m1 = angular.module('myApp', []);
+
+  m1.controller('fnA', ['$scope', function($scope) {
+    $scope.count = 0;
+    $scope.$on('myEvent', function(event) {
+      $scope.count++;
+      console.log(event.targetScope == event.currentScope);
+      console.log(event.name);
+      event.stopPropagation();  //禁止冒泡
+    });
+  }]);
+</script>
+</head>
+<body>
+<div ng-controller="fnA">
+  {{count}}
+  <div ng-controller="fnA" ng-click="$broadcast('myEvent')">
+    {{count}}
+    <div ng-controller="fnA">
+      {{count}}
+    </div>
+  </div>
+</div>
+</body>
+</html>

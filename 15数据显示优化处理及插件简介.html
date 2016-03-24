@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>数据显示优化处理及插件简介</title>
+  <script src="angular.min.js"></script>
+  <script src="http://cdn.bootcss.com/angular.js/1.3.0/angular-sanitize.min.js"></script>
+
+<script>
+  /*
+  ng-bind:          绑定数据
+  ng-bind-template: 绑定多个数据
+  ng-cloak:         控制css的display
+  ng-non-bindable:  取消绑定
+  */
+
+  var m1 = angular.module('myApp', ['ngSanitize']);  //引入插件sanitize
+
+  m1.controller('fnA', ['$scope', function($scope) {
+    $scope.text = 'hello';
+    $scope.tagText = '<h1>hello</h1>';
+  }]);
+</script>
+</head>
+<body>
+<div ng-controller="fnA">
+  <div ng-bind="text"></div>
+  <div>{{text}}</div>
+  <div ng-bind-template="{{text}}, {{text}}"></div>
+  <div ng-bind-html="tagText"></div>
+  <div ng-cloak>{{text}}</div>
+  <div ng-non-bindable>{{text}}</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>$cacheFactory</title>
+  <script src="angular.min.js"></script>
+
+<script>
+  /*
+  $cacheFactory:
+  --info()
+  --put()
+  --get()
+  --remove()
+
+  $log
+  --log()
+  --info()
+  --warn()
+  --error()
+  */
+
+  var m1 = angular.module('myApp', []);
+
+  m1.controller('fnA', ['$scope', '$cacheFactory', '$log', function($scope, $cacheFactory, $log) {
+
+    $log.error('hello');
+
+    var cache = $cacheFactory('myCache', {capacity: 2});
+
+    cache.put('name', 'dave');
+    cache.put('age', '30');
+    cache.put('job', 'it');
+
+    console.log(cache.info());
+    console.log(cache.get('age'));
+    cache.remove('age');
+    console.log(cache.get('age'));
+  }]);
+
+</script>
+</head>
+<body>
+<div ng-controller="fnA"></div>
+</body>
+</html>

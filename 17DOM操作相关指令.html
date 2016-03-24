@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM操作相关指令</title>
+  <script src="angular.min.js"></script>
+
+<script>
+  /*
+  ng-show    //false时隐藏DOM
+  ng-hide
+  ng-if      //false时删除DOM
+  ng-swtich  //on default when
+  ng-open    //存在兼容问题
+  */
+
+  var m1 = angular.module('myApp', []);
+
+  m1.controller('fnA', ['$scope', function($scope){
+    $scope.bBtn = true;
+  }]);
+
+</script>
+</head>
+<body>
+<div ng-controller="fnA">
+  <input type="checkbox" ng-model="bBtn">
+  <div ng-show="bBtn">aaa</div>
+  <div ng-if="bBtn">bbb</div>
+  <div ng-switch on="bBtn">
+    <p ng-switch-default>默认的效果</p>
+    <p ng-switch-when="false">切换的效果</p>
+  </div>
+
+  <details ng-open="bBtn">
+    <summary>Copyright 2011.</summary>
+    <p>All pages and graphics on this web site are the property of W3School.</p>
+  </details>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>ng-controller</title>
+  <script src="angular.min.js"></script>
+
+<script>
+  //ng-controller: as
+
+  var m1 = angular.module('myApp', []);
+
+  m1.controller('fnA', ['$scope', FnA]);
+
+  function FnA($scope) {
+    $scope.text = 'hello angular';
+  }
+
+  FnA.prototype.num = '123';
+  FnA.prototype.text = 'hello';
+  FnA.prototype.show = function(){
+    return 'angularJS';
+  };
+</script>
+</head>
+<body>
+<div ng-controller="fnA">
+  <div>{{text}}</div>
+  <div ng-controller="FnA as a1">{{a1.text}} {{a1.show()}}</div>
+</div>
+</body>
+</html>

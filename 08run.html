@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>run</title>
+  <script src="angular.min.js"></script>
+
+<script>
+  var m1 = angular.module('myApp', []);
+
+  m1.run(['$rootScope', function($rootScope) {
+    $rootScope.name = 'dave';
+  }]);
+
+</script>
+</head>
+<body>
+<div>
+  <p>{{name}}</p>
+</div>
+</body>
+</html>
